@@ -1,11 +1,11 @@
 {
   "name": "hello-demo",
   "version": "1.0.0",
-  "description": "This is a demo for say help in every scenarios",
-  "author": "Eric",
+  "description": "A demo plugin that provides hello world commands, agents, and hooks",
+  "author": {
+    "name": "Eric Wu",
+    "email": "tanker327@gmail.com"
+  },
   "license": "MIT",
-  "type": "custom",
-  "tags": [],
-  "entrypoint": "index.js",
-  "dependencies": {}
+  "tags": ["demo", "example"]
 }

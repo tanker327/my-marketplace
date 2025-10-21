@@ -8,8 +8,8 @@
         {
             "name": "hello-demo",
             "source": "./plugins/hello-demo",
-            "description": "This is a demo for say help in every scenarios",
-            "version": "0.1.0",
+            "description": "A demo plugin that provides hello world commands, agents, and hooks",
+            "version": "1.0.0",
             "license": "MIT",
             "author": {
                 "name": "Eric Wu",

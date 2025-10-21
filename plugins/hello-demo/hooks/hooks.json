@@ -1,5 +1,5 @@
 {
-  "slash-command-submit": {
+  "UserPromptSubmit": {
     "command": "echo 'hello world from hook'"
   }
 }
