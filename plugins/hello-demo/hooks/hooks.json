@@ -2,12 +2,8 @@
   "hooks": {
     "UserPromptSubmit": [
       {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo 'hello world from hook'"
-          }
-        ]
+        "type": "command",
+        "command": "echo 'hello world from hook'"
       }
     ]
   }
