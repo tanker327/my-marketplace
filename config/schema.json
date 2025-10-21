@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://my-marketplace/plugin-schema.json",
+  "title": "Plugin Manifest Schema",
+  "description": "Schema for plugin.json manifest files",
+  "type": "object",
+  "required": ["name", "version", "description", "type"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Plugin name (kebab-case recommended)",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version (e.g., 1.0.0)",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the plugin"
+    },
+    "author": {
+      "type": "string",
+      "description": "Author name or organization"
+    },
+    "license": {
+      "type": "string",
+      "description": "License identifier (e.g., MIT, Apache-2.0)"
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri",
+      "description": "Plugin homepage URL"
+    },
+    "repository": {
+      "type": "string",
+      "format": "uri",
+      "description": "Source code repository URL"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Keywords for discovery"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["mcp-server", "utility", "integration", "custom"],
+      "description": "Plugin type/category"
+    },
+    "entrypoint": {
+      "type": "string",
+      "description": "Main file or command to execute"
+    },
+    "dependencies": {
+      "type": "object",
+      "description": "Required dependencies"
+    },
+    "runtime": {
+      "type": "string",
+      "enum": ["node", "python", "docker", "binary"],
+      "description": "Runtime environment"
+    },
+    "configuration": {
+      "type": "object",
+      "description": "Plugin configuration schema"
+    }
+  }
+}

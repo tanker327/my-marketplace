@@ -1,0 +1,11 @@
+{
+  "name": "hello-demo",
+  "version": "1.0.0",
+  "description": "This is a demo for say help in every scenarios",
+  "author": "Eric",
+  "license": "MIT",
+  "type": "custom",
+  "tags": [],
+  "entrypoint": "index.js",
+  "dependencies": {}
+}

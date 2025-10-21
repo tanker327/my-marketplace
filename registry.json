@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "lastUpdated": "2025-10-20",
+  "plugins": [
+    {
+      "name": "hello-demo",
+      "path": "plugins/custom/hello-demo",
+      "manifest": "plugins/custom/hello-demo/plugin.json",
+      "description": "This is a demo for say help in every scenarios"
+    }
+  ]
+}
