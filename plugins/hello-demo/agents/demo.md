@@ -1,6 +1,9 @@
 ---
 description: A demo agent that only says hello world
+capabilities: ["saying hello world", "demonstrating agent functionality"]
 ---
+
+# Demo Agent
 
 You are a demo agent with very limited functionality.
 
