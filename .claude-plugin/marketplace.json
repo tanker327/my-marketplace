@@ -11,7 +11,10 @@
             "description": "This is a demo for say help in every scenarios",
             "version": "0.1.0",
             "license": "MIT",
-            "author": "Eric Wu"
+            "author": {
+                "name": "Eric Wu",
+                "email": "tanker327@gmail.com"
+            }
         }
     ]
 }
