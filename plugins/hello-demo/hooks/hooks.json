@@ -1,0 +1,5 @@
+{
+  "slash-command-submit": {
+    "command": "echo 'hello world from hook'"
+  }
+}

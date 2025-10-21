@@ -12,30 +12,27 @@ echo -e "${GREEN}=== Add New Plugin to Marketplace ===${NC}\n"
 
 # Prompt for plugin details
 read -p "Plugin name (kebab-case): " PLUGIN_NAME
-read -p "Category (mcp-servers/utilities/integrations/custom): " CATEGORY
 read -p "Description: " DESCRIPTION
 read -p "Author: " AUTHOR
 read -p "License (default: MIT): " LICENSE
 LICENSE=${LICENSE:-MIT}
 
 # Create plugin directory
-PLUGIN_DIR="plugins/${CATEGORY}/${PLUGIN_NAME}"
-mkdir -p "${PLUGIN_DIR}"
+PLUGIN_DIR="plugins/${PLUGIN_NAME}"
+mkdir -p "${PLUGIN_DIR}/.claude-plugin"
+mkdir -p "${PLUGIN_DIR}/commands"
+mkdir -p "${PLUGIN_DIR}/agents"
 
 echo -e "\n${YELLOW}Creating plugin structure...${NC}"
 
 # Create plugin.json
-cat > "${PLUGIN_DIR}/plugin.json" << EOF
+cat > "${PLUGIN_DIR}/.claude-plugin/plugin.json" << EOF
 {
   "name": "${PLUGIN_NAME}",
   "version": "1.0.0",
   "description": "${DESCRIPTION}",
   "author": "${AUTHOR}",
-  "license": "${LICENSE}",
-  "type": "${CATEGORY}",
-  "tags": [],
-  "entrypoint": "index.js",
-  "dependencies": {}
+  "license": "${LICENSE}"
 }
 EOF
 
@@ -47,9 +44,7 @@ ${DESCRIPTION}
 
 ## Installation
 
-\`\`\`bash
-# Add installation instructions
-\`\`\`
+Install this plugin from the marketplace or copy the plugin directory to your project.
 
 ## Usage
 
@@ -66,13 +61,10 @@ Describe configuration options here.
 ${LICENSE}
 EOF
 
-# Create basic directory structure
-mkdir -p "${PLUGIN_DIR}/src"
-mkdir -p "${PLUGIN_DIR}/tests"
-
 echo -e "${GREEN}✓ Plugin structure created at: ${PLUGIN_DIR}${NC}"
 echo -e "${YELLOW}Next steps:${NC}"
-echo "1. Add your plugin code to ${PLUGIN_DIR}/src/"
-echo "2. Update ${PLUGIN_DIR}/plugin.json with additional metadata"
-echo "3. Complete the README documentation"
-echo "4. Add entry to registry.json"
+echo "1. Add commands to ${PLUGIN_DIR}/commands/ (optional)"
+echo "2. Add agents to ${PLUGIN_DIR}/agents/ (optional)"
+echo "3. Update ${PLUGIN_DIR}/.claude-plugin/plugin.json with additional metadata"
+echo "4. Complete the README documentation"
+echo "5. Add entry to .claude-plugin/marketplace.json"

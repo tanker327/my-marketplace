@@ -1,57 +1,76 @@
 # My Marketplace
 
-A curated marketplace for storing and managing plugins/MCP servers.
+A curated marketplace for storing and managing Claude Code plugins.
 
 ## Directory Structure
 
 ```
 my-marketplace/
-├── plugins/              # Plugin storage (organized by category or vendor)
-├── docs/                 # Documentation
-├── scripts/              # Management and utility scripts
-├── tests/                # Test files
-├── config/               # Configuration files
-├── data/                 # Data files (catalogs, metadata)
-├── registry.json         # Main registry catalog
-└── README.md            # This file
+├── .claude-plugin/
+│   └── marketplace.json     # Marketplace configuration
+├── plugins/                 # Plugin storage
+│   └── hello-demo/          # Example plugin
+├── docs/                    # Documentation
+├── scripts/                 # Management and utility scripts
+└── tests/                   # Test files
 ```
 
 ## Getting Started
 
 ### Adding a Plugin
 
-1. Create a new directory under `plugins/` for your plugin
-2. Include a `plugin.json` manifest file with plugin metadata
-3. Update the `registry.json` catalog
+1. Create a new directory under `plugins/{plugin-name}`
+2. Create the plugin structure:
+   ```
+   plugins/{plugin-name}/
+   ├── .claude-plugin/
+   │   └── plugin.json      # Plugin metadata
+   ├── commands/            # Slash commands (optional)
+   ├── agents/              # Custom agents (optional)
+   └── README.md            # Documentation
+   ```
+3. Update `.claude-plugin/marketplace.json` to include the plugin
 
-### Plugin Metadata Format
+### Plugin Structure
 
-Each plugin should include a `plugin.json` file with the following structure:
+Each plugin must have a `.claude-plugin/plugin.json` file:
 
 ```json
 {
-  "name": "plugin-name",
+  "name": "my-plugin",
   "version": "1.0.0",
   "description": "Plugin description",
-  "author": "Author name",
-  "license": "MIT",
-  "homepage": "https://example.com",
-  "repository": "https://github.com/user/repo",
-  "tags": ["tag1", "tag2"],
-  "type": "mcp-server",
-  "entrypoint": "index.js",
-  "dependencies": {}
+  "author": "Your Name",
+  "license": "MIT"
 }
 ```
 
-## Categories
+Optional directories:
+- `commands/` - Custom slash commands
+- `agents/` - Custom agents
+- `hooks/` - Event handlers
 
-Plugins are organized into the following categories:
-- `mcp-servers/` - MCP (Model Context Protocol) servers
-- `utilities/` - Utility plugins
-- `integrations/` - Third-party integrations
-- `custom/` - Custom plugins
+## Marketplace Configuration
+
+The `.claude-plugin/marketplace.json` file defines available plugins:
+
+```json
+{
+  "name": "my-marketplace",
+  "owner": {
+    "name": "Owner Name",
+    "email": "owner@example.com"
+  },
+  "plugins": [
+    {
+      "name": "plugin-name",
+      "source": "./plugins/plugin-name",
+      "description": "Plugin description"
+    }
+  ]
+}
+```
 
 ## Contributing
 
-Please ensure all plugins include proper documentation and follow the metadata format.
+Please ensure all plugins follow the proper structure and include documentation.

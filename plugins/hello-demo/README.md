@@ -4,11 +4,7 @@ This is a demo for say help in every scenarios
 
 ## Installation
 
-Copy the `.claude/commands/hello.md` file to your project's `.claude/commands/` directory:
-
-```bash
-cp plugins/custom/hello-demo/.claude/commands/hello.md .claude/commands/
-```
+Install this plugin from the marketplace or copy the plugin directory to your project.
 
 ## Usage
 
@@ -36,11 +32,16 @@ To use the agent:
 @demo do something
 ```
 
-## Configuration
+### Hook: Slash Command Submit
+When any slash command is run, a hook will print "hello world from hook" to the console.
+
+## Plugin Structure
 
 This plugin includes:
-- `.claude/commands/hello.md` - The `/hello` slash command definition
-- `.claude/agents/demo.md` - The demo agent definition
+- `.claude-plugin/plugin.json` - Plugin metadata
+- `commands/hello.md` - The `/hello` slash command
+- `agents/demo.md` - The demo agent
+- `hooks/hooks.json` - Hook that prints message when slash commands are run
 
 ## License
 

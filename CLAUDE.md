@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Purpose
 
-This is a plugin marketplace for storing and managing MCP (Model Context Protocol) servers and other plugins in a structured, discoverable format.
+This is a Claude Code plugin marketplace for storing and managing plugins (commands, agents, hooks, etc.) in a structured, discoverable format following the official Claude Code plugin marketplace specification.
 
 ## Quick Commands
 
@@ -14,61 +14,81 @@ This is a plugin marketplace for storing and managing MCP (Model Context Protoco
 ./scripts/add-plugin.sh
 
 # Manual creation
-mkdir -p plugins/{category}/{plugin-name}
-# Create plugin.json and README.md following schema in config/schema.json
+mkdir -p plugins/{plugin-name}/.claude-plugin
+# Create .claude-plugin/plugin.json and README.md
+# Update .claude-plugin/marketplace.json
 ```
 
 ## Architecture
 
-### Plugin Categories
-- `plugins/mcp-servers/` - MCP (Model Context Protocol) servers
-- `plugins/utilities/` - Utility plugins
-- `plugins/integrations/` - Third-party integrations
-- `plugins/custom/` - Custom or specialized plugins
+### Marketplace Configuration
 
-### Core Components
+**Location**: `.claude-plugin/marketplace.json` (root of repository)
 
-**Registry System**: `registry.json` serves as the central catalog listing all plugins with their paths and manifests. When adding plugins, always update this file.
+This is the central marketplace catalog that lists all available plugins. Required fields:
+- `name` - Marketplace identifier
+- `owner` - Owner name and email
+- `plugins` - Array of plugin entries with `name`, `source`, and `description`
 
-**Plugin Structure**: Each plugin requires:
-1. `plugin.json` - Metadata manifest (validated against `config/schema.json`)
-2. `README.md` - Documentation
-3. `src/` - Source code
-4. `tests/` - Test files (optional)
+### Plugin Organization
 
-**Schema Validation**: `config/schema.json` defines the JSON schema for plugin manifests. Required fields:
-- `name` (kebab-case, matching pattern `^[a-z0-9-]+$`)
-- `version` (semantic version, e.g., `1.0.0`)
+Plugins are stored directly under `plugins/` directory (no categorization):
+```
+plugins/
+├── hello-demo/
+├── another-plugin/
+└── my-plugin/
+```
+
+### Plugin Structure
+
+Each plugin follows the official Claude Code plugin structure:
+
+```
+plugin-name/
+├── .claude-plugin/
+│   └── plugin.json      # Required: Plugin metadata
+├── commands/            # Optional: Slash commands (*.md files)
+├── agents/              # Optional: Custom agents (*.md files)
+├── hooks/               # Optional: Event handlers (hooks.json)
+└── README.md            # Required: Documentation
+```
+
+**Plugin Manifest** (`.claude-plugin/plugin.json`):
+Required fields:
+- `name` (kebab-case)
+- `version` (semantic version)
 - `description`
-- `type` (one of: `mcp-server`, `utility`, `integration`, `custom`)
+
+Optional fields: `author`, `license`, `homepage`, `repository`, `tags`
 
 ### Design Principles
 
-1. **Categorization**: Plugins are organized by type for discoverability
-2. **Validation**: All plugin.json files must conform to the schema
+1. **Standards Compliance**: Follows official Claude Code plugin marketplace specification
+2. **Simplicity**: Flat plugin structure for easy navigation
 3. **Documentation**: Every plugin must have comprehensive README.md
-4. **Registry Updates**: registry.json must be updated when adding/removing plugins
+4. **Marketplace Updates**: `.claude-plugin/marketplace.json` must be updated when adding/removing plugins
 
 ## Key Files
 
-- `registry.json` - Main plugin catalog (update when adding plugins)
-- `config/schema.json` - Plugin manifest schema (reference for validation)
+- `.claude-plugin/marketplace.json` - Marketplace catalog (update when adding plugins)
+- `plugins/{plugin-name}/.claude-plugin/plugin.json` - Individual plugin metadata
 - `docs/CONTRIBUTING.md` - Full plugin contribution guidelines
 - `docs/ARCHITECTURE.md` - Detailed architecture documentation
 
 ## Adding Plugins
 
 When adding a new plugin:
-1. Choose appropriate category based on plugin type
-2. Create directory structure: `plugins/{category}/{plugin-name}/`
-3. Create `plugin.json` following `config/schema.json` requirements
+1. Create directory: `plugins/{plugin-name}/`
+2. Create `.claude-plugin/plugin.json` with required fields
+3. Add optional directories: `commands/`, `agents/`, `hooks/`
 4. Add `README.md` with installation, usage, and configuration
-5. Update `registry.json` with new plugin entry:
+5. Update `.claude-plugin/marketplace.json`:
    ```json
    {
      "name": "plugin-name",
-     "path": "plugins/{category}/{plugin-name}",
-     "manifest": "plugins/{category}/{plugin-name}/plugin.json"
+     "source": "./plugins/plugin-name",
+     "description": "Brief description"
    }
    ```
 
