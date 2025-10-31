@@ -1,35 +1,4 @@
-Business Result
-
-	•	Raised code quality and reduced risk.
-Standardized linting, pre-commit hooks, and testing conventions; increased testing coverage from 50% to 70% and brought critical security issues to 0, improving maintainability and reviewer confidence across Phoenix.
-	•	Delivered the Bulk Actions frontend end-to-end.
-Architected and shipped the complete client experience; enabled at-scale operations and reduced repetitive manual steps for operations teams; continued enhancements based on feedbacks.
-	•	Accelerated data work with Grid improvements.
-Upgraded AG Grid; added View Management, filter condition visualization, configurable grid options, and robust Excel export—speeding large-dataset navigation and improving export reliability.
-	•	Hardened APIs and improved Developer Experience.
-Restructured service layer with standardized responses, robust error handling, and structured logging; extended server.js to support binary data. Result: faster feature iteration and clearer, actionable errors that reduced confusion and support overhead.
-	•	Executed a seamless MongoDB migration.
-Supported migration to metadata/refdata/configdata endpoints with 100% backward compatibility and protecting business continuity while modernizing foundations.
-	•	Scaled impact via AI enablement.
-Drove pragmatic AI adoption (shared workflows, patterns, and guardrails; ran OpenHands pilots); helped teams draft boilerplate, refactor safely, and explore design alternatives faster.
+Jeo is a dedicated and intelligent developer with strong knowledge of legacy TGSP and Chase infrastructure. He consistently demonstrates ownership by quickly addressing urgent issues and taking responsibility for resolving them. Jeo is collaborative and maintains a growth mindset, always willing to engage in discussions and seek continuous improvement.
 
 
-client/ customer /Stockholder
-
-Faster decisions for power users.
-Grid enhancements (views, visual filters, export) improved data discoverability and reduced time-to-insight for ~500 daily users—directly addressing prior feedback on data accessibility.
-	•	Higher throughput, lower toil.
-Bulk Actions enables high-volume operations with fewer steps and clearer progress—reducing repetitive work and cycle time for stakeholders.
-	•	Greater trust via transparent errors.
-Standardized API error patterns surface actionable guidance; users spend less time guessing what went wrong, and Support/PMs get clearer signals.
-	•	Zero-disruption change management.
-MongoDB migration completed without breaking workflows or access patterns, maintaining uptime and avoiding costly rollbacks.
-
-
-Teamwork & Leadership
-	•	Raised engineering standards beyond my team.
-Linting, testing, pre-commit patterns and coding standard were adopted as best practices by  team; reusable API utilities reduced duplicated effort and sped delivery.
-	•	Champion for practical AI.
-Led by example with AI tooling and OpenHands pilots; shared templates and safety guardrails, helping peers achieve measurable productivity gains without sacrificing quality.
-	•	Effective cross-team collaborator.
-Worked across mutiple teams; partnered closely with backend teams during the MongoDB transition, Bulk action and Audit Trial to keep integrations smooth and timelines predictable.
+To progress to a senior developer role, Jeo should focus on strengthening his systems design and architectural skills, as well as his ability to handle complex, ambiguous scenarios. Developing these capabilities will enable him to take on more technical leadership responsibilities and make broader architectural decisions that impact the team and product.
