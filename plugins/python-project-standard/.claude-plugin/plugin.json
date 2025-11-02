@@ -1,0 +1,11 @@
+{
+  "name": "python-project-standard",
+  "version": "1.0.0",
+  "description": "Production-ready Python project template with UV, Pydantic, Loguru, Pytest, Ruff, Pyright, Pre-commit, CI/CD, and comprehensive logging",
+  "author": {
+    "name": "Eric Wu",
+    "email": "tanker327@gmail.com"
+  },
+  "license": "MIT",
+  "tags": ["python", "uv", "pydantic", "loguru", "pytest", "ruff", "pyright", "boilerplate", "template"]
+}
