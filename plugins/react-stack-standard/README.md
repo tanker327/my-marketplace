@@ -7,7 +7,7 @@ A Claude Code plugin that provides a standardized React project setup with best 
 - **Consistent Stack**: React 18, TypeScript, Vite, TailwindCSS, shadcn/ui
 - **State Management**: Zedux (client) + React Query (server)
 - **Forms**: React Hook Form + Zod validation
-- **Testing**: Vitest + React Testing Library
+- **Testing**: Vitest + React Testing Library with demo test examples
 - **Code Quality**: ESLint, Prettier, Husky
 - **Docker**: Multi-stage build with nginx for production deployment
 
@@ -76,8 +76,33 @@ The agent will:
 2. Install all dependencies
 3. Create the folder structure
 4. Configure build tools
-5. Set up testing and code quality tools
-6. Create Docker files (Dockerfile, nginx.conf, .dockerignore, docker-compose.yml)
+5. Set up testing with demo test examples
+6. Configure code quality tools
+7. Create Docker files (Dockerfile, nginx.conf, .dockerignore, docker-compose.yml)
+
+## Testing
+
+The plugin includes comprehensive test setup with demo examples:
+
+**Demo Test Files:**
+- `Button.test.tsx` - Component testing with React Testing Library
+- `useCounter.test.ts` - Hook testing with renderHook
+- `cn.test.ts` - Utility function testing
+
+**Test Commands:**
+```bash
+# Run tests in watch mode (development)
+npm test
+
+# Run tests once (CI/CD)
+npm run test:run
+
+# Run tests with UI dashboard
+npm run test:ui
+
+# Run tests with coverage report
+npm run test:coverage
+```
 
 ## Docker Commands
 
@@ -95,9 +120,9 @@ docker-compose up -d
 ## Configuration
 
 The plugin includes configurations for:
-- vite.config.ts with path aliases
+- vite.config.ts with path aliases and Vitest config
 - tsconfig.json with path mappings
-- Vitest setup
+- Vitest setup with demo test examples
 - ESLint + Prettier
 - Husky git hooks
 - Dockerfile with multi-stage build

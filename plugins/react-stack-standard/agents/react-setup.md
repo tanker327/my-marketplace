@@ -184,6 +184,148 @@ afterEach(() => {
 })
 ```
 
+**package.json** scripts:
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "prepare": "husky"
+  }
+}
+```
+
+## Demo Test Examples
+
+Create these example test files to demonstrate testing patterns:
+
+**src/components/ui/Button.test.tsx** - Component test example:
+```typescript
+import { describe, it, expect, vi } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { Button } from './button'
+
+describe('Button Component', () => {
+  it('renders with children text', () => {
+    render(<Button>Click me</Button>)
+    expect(screen.getByText('Click me')).toBeInTheDocument()
+  })
+
+  it('calls onClick handler when clicked', async () => {
+    const handleClick = vi.fn()
+    const user = userEvent.setup()
+
+    render(<Button onClick={handleClick}>Click me</Button>)
+    await user.click(screen.getByText('Click me'))
+
+    expect(handleClick).toHaveBeenCalledTimes(1)
+  })
+
+  it('applies variant styles correctly', () => {
+    render(<Button variant="destructive">Delete</Button>)
+    expect(screen.getByRole('button')).toHaveClass('destructive')
+  })
+
+  it('does not call onClick when disabled', async () => {
+    const handleClick = vi.fn()
+    const user = userEvent.setup()
+
+    render(<Button onClick={handleClick} disabled>Disabled</Button>)
+    await user.click(screen.getByText('Disabled'))
+
+    expect(handleClick).not.toHaveBeenCalled()
+  })
+})
+```
+
+**src/hooks/useCounter.test.ts** - Hook test example:
+```typescript
+import { describe, it, expect } from 'vitest'
+import { renderHook, act } from '@testing-library/react'
+import { useCounter } from './useCounter'
+
+describe('useCounter Hook', () => {
+  it('initializes with default value of 0', () => {
+    const { result } = renderHook(() => useCounter())
+    expect(result.current.count).toBe(0)
+  })
+
+  it('increments count', () => {
+    const { result } = renderHook(() => useCounter())
+
+    act(() => {
+      result.current.increment()
+    })
+
+    expect(result.current.count).toBe(1)
+  })
+
+  it('resets to initial value', () => {
+    const { result } = renderHook(() => useCounter(10))
+
+    act(() => {
+      result.current.increment()
+      result.current.reset()
+    })
+
+    expect(result.current.count).toBe(10)
+  })
+})
+```
+
+**src/lib/utils.test.ts** - Utility function test example:
+```typescript
+import { describe, it, expect } from 'vitest'
+import { cn } from './utils'
+
+describe('cn Utility Function', () => {
+  it('merges class names', () => {
+    expect(cn('px-2 py-1', 'bg-blue-500')).toBe('px-2 py-1 bg-blue-500')
+  })
+
+  it('handles conditional classes', () => {
+    const result = cn('base', {
+      'active': true,
+      'inactive': false,
+    })
+    expect(result).toBe('base active')
+  })
+
+  it('resolves Tailwind conflicts (keeps last)', () => {
+    expect(cn('px-2', 'px-4')).toBe('px-4')
+  })
+
+  it('handles undefined and null values', () => {
+    expect(cn('base', undefined, null, 'extra')).toBe('base extra')
+  })
+})
+```
+
+## Test Commands
+
+```bash
+# Run tests in watch mode (for development)
+npm test
+
+# Run tests once (for CI/CD)
+npm run test:run
+
+# Run tests with UI
+npm run test:ui
+
+# Run tests with coverage report
+npm run test:coverage
+```
+
 ## Docker Multi-Stage Build
 
 **Dockerfile** - Optimized 3-stage build:
@@ -333,7 +475,12 @@ When the user asks to create a React project or set up their React environment:
 2. **Execute setup**: Run all installation commands and create the folder structure
 3. **Configure files**: Set up vite.config.ts, tsconfig.json, test setup, and Docker files
 4. **Create Docker files**: Add Dockerfile, nginx.conf, .dockerignore, docker-compose.yml
-5. **Verify**: Check that all dependencies installed correctly
-6. **Guide**: Provide next steps for development and deployment
+5. **Add demo tests**: Create example test files:
+   - `src/components/ui/Button.test.tsx` - Component test
+   - `src/hooks/useCounter.test.ts` - Hook test
+   - `src/lib/utils.test.ts` - Utility test
+6. **Update package.json**: Add test scripts (test, test:ui, test:run, test:coverage)
+7. **Verify**: Check that all dependencies installed correctly and tests run
+8. **Guide**: Provide next steps for development, testing, and deployment
 
 Always use this exact stack unless explicitly requested otherwise.
