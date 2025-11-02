@@ -7,7 +7,7 @@ A Claude Code plugin that provides a standardized React project setup with best 
 - **Consistent Stack**: React 18, TypeScript, Vite, TailwindCSS, shadcn/ui
 - **State Management**: Zedux (client) + React Query (server)
 - **Forms**: React Hook Form + Zod validation
-- **Testing**: Vitest + React Testing Library
+- **Testing**: Vitest + React Testing Library with demo test examples
 - **Code Quality**: ESLint, Prettier, Husky
 - **Docker**: Multi-stage build with nginx for production deployment
 
@@ -17,12 +17,19 @@ A Claude Code plugin that provides a standardized React project setup with best 
 src/
 ├── atoms/       # Zedux state atoms
 ├── components/  # Reusable UI components
+│   └── ui/
+│       ├── button.tsx
+│       └── button.spec.tsx      # Co-located tests
 ├── views/       # Composed sections
 ├── pages/       # Full page layouts
 ├── hooks/       # Custom hooks
+│   ├── useCounter.ts
+│   └── useCounter.spec.ts       # Co-located tests
 ├── lib/         # Utilities
+│   ├── utils.ts
+│   └── utils.spec.ts            # Co-located tests
 ├── types/       # TypeScript types
-└── tests/       # Test setup
+└── test/        # Global test setup
 ```
 
 ## Architecture
@@ -30,10 +37,15 @@ src/
 **Layered approach:**
 - atoms → components → views → pages
 
+**Co-located tests:**
+- Tests live next to source files using `.spec.tsx` naming
+- Makes tests easy to find and maintain
+- Example: `button.tsx` + `button.spec.tsx`
+
 This structure provides:
 - Clear separation of concerns
 - Better reusability
-- Easier testing
+- Easier testing and maintenance
 - Scalability
 
 ## Docker Multi-Stage Build
@@ -76,8 +88,33 @@ The agent will:
 2. Install all dependencies
 3. Create the folder structure
 4. Configure build tools
-5. Set up testing and code quality tools
-6. Create Docker files (Dockerfile, nginx.conf, .dockerignore, docker-compose.yml)
+5. Set up testing with demo test examples
+6. Configure code quality tools
+7. Create Docker files (Dockerfile, nginx.conf, .dockerignore, docker-compose.yml)
+
+## Testing
+
+The plugin includes comprehensive test setup with demo examples using co-located `.spec.tsx` files:
+
+**Demo Test Files (co-located with source):**
+- `button.spec.tsx` - Component testing with React Testing Library
+- `useCounter.spec.ts` - Hook testing with renderHook
+- `utils.spec.ts` - Utility function testing (cn helper)
+
+**Test Commands:**
+```bash
+# Run tests in watch mode (development)
+npm test
+
+# Run tests once (CI/CD)
+npm run test:run
+
+# Run tests with UI dashboard
+npm run test:ui
+
+# Run tests with coverage report
+npm run test:coverage
+```
 
 ## Docker Commands
 
@@ -95,9 +132,9 @@ docker-compose up -d
 ## Configuration
 
 The plugin includes configurations for:
-- vite.config.ts with path aliases
+- vite.config.ts with path aliases and Vitest config
 - tsconfig.json with path mappings
-- Vitest setup
+- Vitest setup with demo test examples
 - ESLint + Prettier
 - Husky git hooks
 - Dockerfile with multi-stage build

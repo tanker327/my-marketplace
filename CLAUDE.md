@@ -10,22 +10,36 @@ This is a Claude Code plugin marketplace for storing and managing plugins (comma
 
 ### Adding a Plugin
 ```bash
-# Interactive plugin creation
+# Interactive plugin creation (recommended)
 ./scripts/add-plugin.sh
 
-# Manual creation
+# Manual plugin directory creation
 mkdir -p plugins/{plugin-name}/.claude-plugin
-# Create .claude-plugin/plugin.json and README.md
-# Update .claude-plugin/marketplace.json
+mkdir -p plugins/{plugin-name}/commands  # optional
+mkdir -p plugins/{plugin-name}/agents    # optional
+mkdir -p plugins/{plugin-name}/hooks     # optional
 ```
 
 ### Validation
 ```bash
-# View all plugin files
-find plugins -type f
+# List all plugins
+ls -1 plugins/
 
-# Check marketplace configuration
+# View all plugin manifests
+find plugins -name "plugin.json" -exec cat {} \;
+
+# Check marketplace catalog
 cat .claude-plugin/marketplace.json
+
+# Verify plugin structure
+find plugins/{plugin-name} -type f
+```
+
+### Viewing Examples
+```bash
+# View example plugins
+cat plugins/hello-demo/.claude-plugin/plugin.json
+cat plugins/react-stack-standard/.claude-plugin/plugin.json
 ```
 
 ## Architecture
@@ -87,12 +101,29 @@ Optional fields: `author`, `license`, `homepage`, `repository`, `tags`
 
 ## Adding Plugins
 
-When adding a new plugin:
-1. Create directory: `plugins/{plugin-name}/`
-2. Create `.claude-plugin/plugin.json` with required fields (name, version, description)
-3. Add optional directories: `commands/`, `agents/`, `hooks/`
-4. Add `README.md` with installation, usage, and configuration
-5. **CRITICAL**: Update `.claude-plugin/marketplace.json` to register the plugin:
+Use `./scripts/add-plugin.sh` for interactive scaffolding, then complete these steps:
+
+1. **Create plugin structure**: `plugins/{plugin-name}/`
+2. **Create plugin manifest**: `.claude-plugin/plugin.json` with required fields:
+   ```json
+   {
+     "name": "plugin-name",
+     "version": "1.0.0",
+     "description": "Brief description",
+     "author": {
+       "name": "Author Name",
+       "email": "email@example.com"
+     },
+     "license": "MIT",
+     "tags": ["keyword1", "keyword2"]
+   }
+   ```
+3. **Add functionality** (optional):
+   - `commands/*.md` - Slash commands
+   - `agents/*.md` - Custom agents
+   - `hooks/hooks.json` - Event handlers
+4. **Create documentation**: `README.md` with installation, usage, and configuration
+5. **CRITICAL - Register in marketplace**: Add entry to `.claude-plugin/marketplace.json`:
    ```json
    {
      "name": "plugin-name",
@@ -107,9 +138,26 @@ When adding a new plugin:
    }
    ```
 
+**Note**: Plugins must be registered in BOTH `plugins/{plugin-name}/.claude-plugin/plugin.json` AND `.claude-plugin/marketplace.json` (root). The marketplace.json entry makes the plugin discoverable.
+
 ## Critical Workflow Rules
 
-1. **Always update marketplace.json**: When adding or modifying plugins, `.claude-plugin/marketplace.json` MUST be updated with the plugin entry
-2. **Maintain structure consistency**: All plugin manifests must include name, version, and description at minimum
-3. **Use add-plugin.sh for scaffolding**: The script creates the correct structure but you must still manually update marketplace.json
-4. **Documentation location**: All general documentation goes in `docs/` folder, plugin-specific docs in plugin README.md
+1. **Dual Registration Required**: Every plugin needs TWO registrations:
+   - Plugin manifest: `plugins/{plugin-name}/.claude-plugin/plugin.json`
+   - Marketplace catalog: `.claude-plugin/marketplace.json` (root level)
+   Missing either registration will cause the plugin to not work or not be discoverable.
+
+2. **Always update marketplace.json**: When adding/modifying/removing plugins, `.claude-plugin/marketplace.json` MUST be updated
+
+3. **Naming consistency**: Plugin name must be identical in:
+   - Directory name: `plugins/{plugin-name}/`
+   - Plugin manifest `name` field
+   - Marketplace `name` field
+
+4. **Use add-plugin.sh for scaffolding**: The script creates the correct structure but you must still manually update marketplace.json afterward
+
+5. **Documentation location**: General docs go in `docs/`, plugin-specific docs in plugin `README.md`
+
+6. **Required manifest fields**: At minimum, plugin.json must have: `name`, `version`, `description`
+
+7. **Reference existing plugins**: Use `hello-demo` and `react-stack-standard` as templates for structure
