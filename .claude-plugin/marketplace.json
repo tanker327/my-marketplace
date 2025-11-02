@@ -15,6 +15,17 @@
                 "name": "Eric Wu",
                 "email": "tanker327@gmail.com"
             }
+        },
+        {
+            "name": "react-stack-standard",
+            "source": "./plugins/react-stack-standard",
+            "description": "A starting point for new React projects with TypeScript, Vite, TailwindCSS, shadcn/ui, React Query, Zedux, Vitest, and Docker multi-stage build deployment",
+            "version": "1.0.0",
+            "license": "MIT",
+            "author": {
+                "name": "Eric Wu",
+                "email": "tanker327@gmail.com"
+            }
         }
     ]
 }

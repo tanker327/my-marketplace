@@ -19,6 +19,15 @@ mkdir -p plugins/{plugin-name}/.claude-plugin
 # Update .claude-plugin/marketplace.json
 ```
 
+### Validation
+```bash
+# View all plugin files
+find plugins -type f
+
+# Check marketplace configuration
+cat .claude-plugin/marketplace.json
+```
+
 ## Architecture
 
 ### Marketplace Configuration
@@ -80,18 +89,27 @@ Optional fields: `author`, `license`, `homepage`, `repository`, `tags`
 
 When adding a new plugin:
 1. Create directory: `plugins/{plugin-name}/`
-2. Create `.claude-plugin/plugin.json` with required fields
+2. Create `.claude-plugin/plugin.json` with required fields (name, version, description)
 3. Add optional directories: `commands/`, `agents/`, `hooks/`
 4. Add `README.md` with installation, usage, and configuration
-5. Update `.claude-plugin/marketplace.json`:
+5. **CRITICAL**: Update `.claude-plugin/marketplace.json` to register the plugin:
    ```json
    {
      "name": "plugin-name",
      "source": "./plugins/plugin-name",
-     "description": "Brief description"
+     "description": "Brief description",
+     "version": "1.0.0",
+     "license": "MIT",
+     "author": {
+       "name": "Author Name",
+       "email": "email@example.com"
+     }
    }
    ```
 
-## Documentation Location
+## Critical Workflow Rules
 
-All documentation must be added to the `docs/` folder (per user requirements).
+1. **Always update marketplace.json**: When adding or modifying plugins, `.claude-plugin/marketplace.json` MUST be updated with the plugin entry
+2. **Maintain structure consistency**: All plugin manifests must include name, version, and description at minimum
+3. **Use add-plugin.sh for scaffolding**: The script creates the correct structure but you must still manually update marketplace.json
+4. **Documentation location**: All general documentation goes in `docs/` folder, plugin-specific docs in plugin README.md

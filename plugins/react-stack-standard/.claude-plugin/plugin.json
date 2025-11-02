@@ -1,0 +1,11 @@
+{
+  "name": "react-stack-standard",
+  "version": "1.0.0",
+  "description": "Standard React project stack and configuration with TypeScript, Vite, TailwindCSS, shadcn/ui, React Query, Zedux, React Router, Vitest, and more",
+  "author": {
+    "name": "Eric Wu",
+    "email": "tanker327@gmail.com"
+  },
+  "license": "MIT",
+  "tags": ["react", "typescript", "vite", "tailwind", "stack", "boilerplate"]
+}
