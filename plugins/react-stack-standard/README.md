@@ -17,12 +17,19 @@ A Claude Code plugin that provides a standardized React project setup with best 
 src/
 ├── atoms/       # Zedux state atoms
 ├── components/  # Reusable UI components
+│   └── ui/
+│       ├── button.tsx
+│       └── button.spec.tsx      # Co-located tests
 ├── views/       # Composed sections
 ├── pages/       # Full page layouts
 ├── hooks/       # Custom hooks
+│   ├── useCounter.ts
+│   └── useCounter.spec.ts       # Co-located tests
 ├── lib/         # Utilities
+│   ├── utils.ts
+│   └── utils.spec.ts            # Co-located tests
 ├── types/       # TypeScript types
-└── tests/       # Test setup
+└── test/        # Global test setup
 ```
 
 ## Architecture
@@ -30,10 +37,15 @@ src/
 **Layered approach:**
 - atoms → components → views → pages
 
+**Co-located tests:**
+- Tests live next to source files using `.spec.tsx` naming
+- Makes tests easy to find and maintain
+- Example: `button.tsx` + `button.spec.tsx`
+
 This structure provides:
 - Clear separation of concerns
 - Better reusability
-- Easier testing
+- Easier testing and maintenance
 - Scalability
 
 ## Docker Multi-Stage Build
@@ -82,12 +94,12 @@ The agent will:
 
 ## Testing
 
-The plugin includes comprehensive test setup with demo examples:
+The plugin includes comprehensive test setup with demo examples using co-located `.spec.tsx` files:
 
-**Demo Test Files:**
-- `Button.test.tsx` - Component testing with React Testing Library
-- `useCounter.test.ts` - Hook testing with renderHook
-- `cn.test.ts` - Utility function testing
+**Demo Test Files (co-located with source):**
+- `button.spec.tsx` - Component testing with React Testing Library
+- `useCounter.spec.ts` - Hook testing with renderHook
+- `utils.spec.ts` - Utility function testing (cn helper)
 
 **Test Commands:**
 ```bash

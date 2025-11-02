@@ -58,12 +58,19 @@ src/
 ├── atoms/            # Zedux atoms (state management)
 ├── components/       # Small, reusable UI components
 │   └── ui/          # shadcn/ui components
+│       ├── button.tsx
+│       └── button.spec.tsx      # Co-located tests
 ├── views/           # Composed sections (combination of components)
 ├── pages/           # Full page layouts (combination of views)
 ├── hooks/           # Custom React hooks
+│   ├── useCounter.ts
+│   └── useCounter.spec.ts       # Co-located tests
 ├── lib/             # Utilities and helpers
+│   ├── utils.ts
+│   └── utils.spec.ts            # Co-located tests
 ├── types/           # TypeScript type definitions
-├── tests/           # Test utilities and setup
+├── test/            # Test setup and global utilities
+│   └── setup.ts
 ├── App.tsx
 └── main.tsx
 ```
@@ -148,7 +155,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/tests/setup.ts',
+    setupFiles: './src/test/setup.ts',
     css: true,
   },
 })
@@ -173,7 +180,7 @@ export default defineConfig({
 }
 ```
 
-**src/tests/setup.ts**:
+**src/test/setup.ts** - Global test configuration:
 ```typescript
 import '@testing-library/jest-dom'
 import { cleanup } from '@testing-library/react'
@@ -205,9 +212,9 @@ afterEach(() => {
 
 ## Demo Test Examples
 
-Create these example test files to demonstrate testing patterns:
+Create these example test files co-located with their source files using `.spec.tsx` naming:
 
-**src/components/ui/Button.test.tsx** - Component test example:
+**src/components/ui/button.spec.tsx** - Component test example (co-located with button.tsx):
 ```typescript
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
@@ -247,7 +254,7 @@ describe('Button Component', () => {
 })
 ```
 
-**src/hooks/useCounter.test.ts** - Hook test example:
+**src/hooks/useCounter.spec.ts** - Hook test example (co-located with useCounter.ts):
 ```typescript
 import { describe, it, expect } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
@@ -282,7 +289,7 @@ describe('useCounter Hook', () => {
 })
 ```
 
-**src/lib/utils.test.ts** - Utility function test example:
+**src/lib/utils.spec.ts** - Utility function test example (co-located with utils.ts):
 ```typescript
 import { describe, it, expect } from 'vitest'
 import { cn } from './utils'
@@ -458,6 +465,7 @@ docker buildx build --platform linux/amd64,linux/arm64 -t my-react-app:latest .
 
 ## Key Notes
 
+- **Co-located tests**: Tests live next to source files using `.spec.tsx` naming (e.g., `button.tsx` + `button.spec.tsx`)
 - **Vitest vs Jest**: Use `vi` for mocks, import from 'vitest'
 - **Zedux atoms**: Keep focused and small, export from atoms/index.ts
 - **State split**: Zedux for client state, React Query for server state
@@ -475,10 +483,11 @@ When the user asks to create a React project or set up their React environment:
 2. **Execute setup**: Run all installation commands and create the folder structure
 3. **Configure files**: Set up vite.config.ts, tsconfig.json, test setup, and Docker files
 4. **Create Docker files**: Add Dockerfile, nginx.conf, .dockerignore, docker-compose.yml
-5. **Add demo tests**: Create example test files:
-   - `src/components/ui/Button.test.tsx` - Component test
-   - `src/hooks/useCounter.test.ts` - Hook test
-   - `src/lib/utils.test.ts` - Utility test
+5. **Add demo tests**: Create example test files co-located with source files:
+   - `src/components/ui/button.spec.tsx` - Component test (co-located)
+   - `src/hooks/useCounter.spec.ts` - Hook test (co-located)
+   - `src/lib/utils.spec.ts` - Utility test (co-located)
+   - `src/test/setup.ts` - Global test setup
 6. **Update package.json**: Add test scripts (test, test:ui, test:run, test:coverage)
 7. **Verify**: Check that all dependencies installed correctly and tests run
 8. **Guide**: Provide next steps for development, testing, and deployment
