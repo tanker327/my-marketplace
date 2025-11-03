@@ -32,6 +32,21 @@ A comprehensive starting point for new React projects with a modern, production-
 
 **[View Plugin →](./plugins/react-stack-standard/)**
 
+### 🐍 python-project-standard
+Production-ready Python project template with modern tooling and best practices.
+
+**Features:**
+- UV for fast package management
+- Pydantic for data validation
+- Loguru for comprehensive logging
+- Pytest for testing
+- Ruff for linting and formatting
+- Pyright for type checking
+- Pre-commit hooks
+- CI/CD configuration
+
+**[View Plugin →](./plugins/python-project-standard/)**
+
 ## Directory Structure
 
 ```
@@ -40,6 +55,7 @@ my-marketplace/
 │   └── marketplace.json     # Marketplace catalog (all plugins listed here)
 ├── plugins/                 # Plugin storage
 │   ├── hello-demo/          # Demo plugin
+│   ├── python-project-standard/ # Python project starter
 │   └── react-stack-standard/ # React project starter
 ├── docs/                    # Documentation
 │   ├── ARCHITECTURE.md      # Detailed architecture docs

@@ -26,6 +26,17 @@
                 "name": "Eric Wu",
                 "email": "tanker327@gmail.com"
             }
+        },
+        {
+            "name": "python-project-standard",
+            "source": "./plugins/python-project-standard",
+            "description": "Production-ready Python project template with UV, Pydantic, Loguru, Pytest, Ruff, Pyright, Pre-commit, CI/CD, and comprehensive logging",
+            "version": "1.0.0",
+            "license": "MIT",
+            "author": {
+                "name": "Eric Wu",
+                "email": "tanker327@gmail.com"
+            }
         }
     ]
 }
