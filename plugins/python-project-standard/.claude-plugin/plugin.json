@@ -6,6 +6,5 @@
     "name": "Eric Wu",
     "email": "tanker327@gmail.com"
   },
-  "license": "MIT",
-  "tags": ["python", "uv", "pydantic", "loguru", "pytest", "ruff", "pyright", "boilerplate", "template"]
+  "license": "MIT"
 }

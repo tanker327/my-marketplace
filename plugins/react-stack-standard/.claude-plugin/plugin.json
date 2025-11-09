@@ -6,6 +6,5 @@
     "name": "Eric Wu",
     "email": "tanker327@gmail.com"
   },
-  "license": "MIT",
-  "tags": ["react", "typescript", "vite", "tailwind", "stack", "boilerplate"]
+  "license": "MIT"
 }

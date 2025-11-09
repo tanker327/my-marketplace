@@ -83,7 +83,7 @@ Required fields:
 - `version` (semantic version)
 - `description`
 
-Optional fields: `author`, `license`, `homepage`, `repository`, `tags`
+Optional fields: `author`, `license`, `homepage`, `repository`
 
 ### Design Principles
 
@@ -114,8 +114,7 @@ Use `./scripts/add-plugin.sh` for interactive scaffolding, then complete these s
        "name": "Author Name",
        "email": "email@example.com"
      },
-     "license": "MIT",
-     "tags": ["keyword1", "keyword2"]
+     "license": "MIT"
    }
    ```
 3. **Add functionality** (optional):
